@@ -1,5 +1,5 @@
 {
-  "script": {
+  "scripts": {
     "dev": "node --import=tsx --watch ./src/server.ts",
     "build": "tsc",
     "start": "node ./dist/server.js"
