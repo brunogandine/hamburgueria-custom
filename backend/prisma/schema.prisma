@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Categories {
+  id          Int      @id @default(autoincrement()) @db.UnsignedInt
+  name        String   @db.VarChar(255)
+  description String?  @db.Text
+  active      Boolean  @default(true)
+  products    Products[]
+
+  @@map("categories")
+}
+
+model Products {
+  id          Int      @id @default(autoincrement()) @db.UnsignedInt
+  category_id Int      @db.UnsignedInt
+  name        String   @db.VarChar(255)
+  description String   @db.Text
+  price       Decimal  @db.Decimal(10, 2)
+  active      Boolean  @default(true)
+
+  category    Categories @relation(fields: [category_id], references: [id])
+
+  @@index([category_id], name: "idx_category_id")
+  @@map("products")
+}
+

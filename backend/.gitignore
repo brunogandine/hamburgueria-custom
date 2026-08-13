@@ -19,9 +19,10 @@ dist
 dist-ssr
 *.local
 
-#Environment Variables
+# Environment Variables
 
 .env
 .env.*
 !.env.example
 
+/src/generated/prisma
